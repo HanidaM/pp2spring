@@ -1,28 +1,15 @@
-lst = []
 n = int(input())
-
-s = "@gmail.com"
-
-
-for i in range(0, n):
-    logs = input()
-
-    lst.append(logs)
+lst = []
 
 
-for i in lst:
-    if i.find(s):
-        print(i.removesuffix("@gmail.com"))
-    else:
-        lst.remove(i)
+def delmail(n):
+    for i in range(n):
+        lst.append(input())
 
-def contain(s):
-    for i in lst:
-        if i.find(s):
-            return False
-        else:
-            return True
+    for i in range(len(lst)):
+        q = lst[i].endswith("@gmail.com")
+        if q == 1:
+            print(lst[i][:-10])
 
-if contain(s):
-    print(i.removesuffix(s))
-else:
+
+delmail(n)
