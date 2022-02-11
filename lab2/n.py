@@ -1,14 +1,13 @@
-a = list() 
+a = []
+arr = []
 
-while True: 
-     n = int(input()) 
-     if n == 0: 
-         break 
-     else: 
-         a.append(n)
 
-for i in range((len(a) // 2) + 1): 
-    if i == len(a) - i: 
-        print(a[i]) 
-    else: 
-        print(a[i] + a[-1 - i]) 
+a.append((int(input())))
+while(a[len(a) - 1] != 0):
+    a.append(int(input()))
+
+for i in range(int((len(a) - 1) / 2)):
+    arr.append(a[i] + a[len(a) - 2 - i])
+if(len(a) % 2 == 0):
+    arr.append(a[int((len(a)) / 2 ) - 1])
+print(*arr)
