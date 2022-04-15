@@ -101,4 +101,6 @@ while not finished:
         pygame.draw.rect(screen, col, (20 + i * w, 20, w, 20))
 
     pygame.display.flip()
+    pygame.display.update
+    pygame.time.Clock(FPS)  
 pygame.quit()
