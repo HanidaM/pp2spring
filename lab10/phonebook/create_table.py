@@ -12,10 +12,7 @@ create_table = '''
 '''
 
 current.execute(create_table)
-# delete_raw = '''
-#     DELETE FROM PhoneBook WHERE name = %s;
-# '''
-# current.execute(delete_raw,('Eer',))
+
 current.close()
 config.commit()
 config.close()

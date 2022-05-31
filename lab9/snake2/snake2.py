@@ -3,6 +3,14 @@ import sys
 import copy
 import random
 import time
+import psycopg2
+
+if __name__ == "__main__":
+    playerName = input("Enter your name:")
+
+config = psycopg2.connect(**params)
+current = config.cursor()
+
 
 pygame.init()
 
@@ -189,6 +197,31 @@ def gameLoop():
             font = pygame.font.SysFont("Copperplate Gothic Bold", 50)
             text = font.render("Game Over!", True, snake_colour)
             display.blit(text, (500/2-50, 500/2))
+            insert_into = '''
+            INSERT INTO records VALUES (%s, %s);
+            '''
+            try:
+                get = f'''
+                    SELECT record FROM records WHERE name = '{playerName}';
+                '''
+                current.execute(get)
+                output = current.fetchone()
+                high_score = output[0]
+                exist = True
+            except:
+                pass
+            if exist:
+                if score > high_score:
+                    update = '''
+                        UPDATE records SET record = %s WHERE name = %s;
+                    '''
+                    current.execute(update,(score,playerName))
+            else:
+                current.execute(insert_into, (f'{playerName}', f'{score}'))
+            current.close()
+            config.commit()
+            config.close()
+            
             pygame.display.update()
             time.sleep(3)
             snake.reset()
@@ -207,3 +240,6 @@ def gameLoop():
         clock.tick(SPEED)
 
 gameLoop()
+
+
+
